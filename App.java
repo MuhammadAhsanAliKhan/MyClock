@@ -1,40 +1,38 @@
-package com.mycompany.clock;
-
 import java.time.LocalDateTime;  
 import java.time.format.DateTimeFormatter;  
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.Graphics;
 import javax.swing.JPanel;
 /**
  *
  * @author Ahsan
  */
-public class Main implements ActionListener {
+public class App implements ActionListener {
     public Timer timer;
     public Renderer rend;
     public static JFrame jframe;
-    public static Main obj= new Main();
+    public static App obj= new App();
     public final static int WIDTH=400, HEIGHT=100;
     
     public static void main(String[] args) {
-        obj= new Main();
+        obj= new App();
     }
-    public Main() {
+    public App() {
         jframe= new JFrame("MyClock");
         
-        JLabel jlabel= new JLabel(time());
+        // JLabel jlabel= new JLabel(time());
         rend= new Renderer();
         timer= new Timer(10, this);
         jframe.add(rend);
-        jframe.getContentPane().add(jlabel);
+        // jframe.getContentPane().add(jlabel);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	jframe.setSize(WIDTH, HEIGHT);
-	jframe.setResizable(false);
+        jframe.setSize(WIDTH, HEIGHT);
+        jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
         jframe.setVisible(true);
         
@@ -52,6 +50,8 @@ public class Main implements ActionListener {
             //paint background
             g.setColor(Color.yellow);
             g.fillRect(0, 0, WIDTH, HEIGHT);
+            g.setColor(Color.blue);
+		    g.drawString(time(), 25, 25);
     }
 
     @Override
@@ -59,6 +59,7 @@ public class Main implements ActionListener {
         rend.repaint();
     }
 }
+
 
 class Renderer extends JPanel
 	{
@@ -69,6 +70,6 @@ class Renderer extends JPanel
 		public void paint(Graphics g) 
 		{
 			super.paintComponents(g);
-			Main.obj.repaint(g);
+			App.obj.repaint(g);
 		}
 }
